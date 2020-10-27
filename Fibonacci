@@ -1,28 +1,32 @@
-# Program to display the Fibonacci sequence up to n-th term where n is provided by the user
+from functools import lru_cache
 
-# change this value for a different result
-nterms = 10
+@lru_cache(maxsize=None)
+def fib(n):
+    if n < 2:  # base case
+        return n
+    return fib(n-1) + fib(n-2)
 
-# uncomment to take input from the user
-#nterms = int(input("How many terms? "))
+if __name__ == "__main__":
+  print(fib(int(input())))
+  
+  
+  
+  """ Approach for recursion with LRU
+f(5) = 
+f(4) + f(3) = 
+f(3) + f(2) + f(3) =
+f(2) + f(1) + f(2) + f(3) =
+f(1) + f(0) + f(1) + f(2) + f(3) = (base clauses) = 
+1 + f(0) + f(1) + f(2) + f(3) = 
+2 + f(1) + f(2) + f(3) =
+3 + f(2) + f(3) = 
+3 + f(1) + f(0) + f(3) = 
+3 + 1 + f(0) + f(3) = 
+5 + f(3) = 
+5 + f(2) + f(1)  =
+5 + f(1) + f(0) + f(1) =
+5 + 1 + f(0) + f(1) =
+5 + 2 + f(1) =
+8
 
-# first two terms
-n1 = 0
-n2 = 1
-count = 0
-
-# check if the number of terms is valid
-if nterms <= 0:
-   print("Please enter a positive integer")
-elif nterms == 1:
-   print("Fibonacci sequence upto",nterms,":")
-   print(n1)
-else:
-   print("Fibonacci sequence upto",nterms,":")
-   while count < nterms:
-       print(n1,end=' , ')
-       nth = n1 + n2
-       # update values
-       n1 = n2
-       n2 = nth
-       count += 1
+"""
